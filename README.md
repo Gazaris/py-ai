@@ -32,4 +32,4 @@ If was entered a name, that several people have, user would be prompted to clari
 
 Then, the program will output the amount of degrees of separation the two entered actors have.
 
-And finally, output each degree between between actors as a string
+And finally, output each degree between actors as a string.
