@@ -2,34 +2,9 @@
 In this lesson I learned about various search algorithms and how they are able to find paths in different ways.
 
 ## maze.py
-Basically ~~stolen~~copy-paste from the lecture code with the addition of some comments.
+Basically ~~stolen~~ copy-paste from the lecture code with the addition of some comments.
+In two subdirectories lie two lesson's projects. Details on each you can read in it's respective README file.
 
-## Degrees
-This is a project that determines how many “degrees of separation” apart two actors are.
-
-### Usage
-```
-python degrees.py [directory]
-```
-If directory is not specified, ```large``` is chosen.
-The project is also provided with ```small``` directory option for tests rather than actual use.
-
-### Output example
-```
-$ python degrees.py large
-Loading data...
-Data loaded.
-Name: Emma Watson
-Name: Jennifer Lawrence
-3 degrees of separation.
-1: Emma Watson and Brendan Gleeson starred in Harry Potter and the Order of the Phoenix
-2: Brendan Gleeson and Michael Fassbender starred in Trespass Against Us
-3: Michael Fassbender and Jennifer Lawrence starred in X-Men: First Class
-```
-
-After launch the program will prompt the user to enter first name and then the second name.
-If was entered a name, that several people have, user would be prompted to clarify.
-
-Then, the program will output the amount of degrees of separation the two entered actors have.
-
-And finally, output each degree between actors as a string.
+Projects:
+  0. [degrees](degrees/README.md)
+  1. [tictactoe](tictactoe/README.md)
