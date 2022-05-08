@@ -16,3 +16,6 @@ Explores the node closest to the goal which is determined by the heuristic funct
 
 ## A* Search
 Like the Greedy Best-First Search, A* Search relies on heuristic function h(n) (estimated cost from the node to the goal), but also considers the distance g(n) (accrued cost) until current location.
+
+## Notes to self
+ - Fix max min_action

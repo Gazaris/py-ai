@@ -1,14 +1,14 @@
-## Degrees
+# Degrees
 This is a project that determines how many “degrees of separation” apart two actors are.
 
-### Usage
+## Usage
 ```
 python degrees.py [directory]
 ```
 If directory is not specified, ```large``` is chosen.
 The project is also provided with ```small``` directory option for tests rather than actual use.
 
-### Output example
+## Output example
 ```
 $ python degrees.py large
 Loading data...

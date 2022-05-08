@@ -91,24 +91,24 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    #Initialize start actor node, frotier set and explored set
-    #state = actor, parent = actor up the chain, action = linking movie
+    # Initialize start actor node, frotier set and explored set
+    # state = actor, parent = actor up the chain, action = linking movie
     start = Node(state=source, parent=None, action=None)
     frontier = QueueFrontier()
     frontier.add(start)
     explored = set()
 
     while True:
-        #Return None if there is no solution
+        # Return None if there is no solution
         if frontier.empty():
             return None
         
-        #Remove a node from the frontier and mark it as explored
+        # Remove a node from the frontier and mark it as explored
         node = frontier.remove()
         explored.add(node.state)
 
-        #Find neighbors and add them to the frontier
-        #If one of the neighbors is the target create a solution and return it
+        # Find neighbors and add them to the frontier
+        # If one of the neighbors is the target create a solution and return it
         for movie in people[node.state]["movies"]:
             for neighbor in movies[movie]["stars"]:
                 if not frontier.contains_state(neighbor) and neighbor not in explored:
@@ -122,7 +122,6 @@ def shortest_path(source, target):
                         return solution
                             
                     frontier.add(child)
-
 
 
 def person_id_for_name(name):
