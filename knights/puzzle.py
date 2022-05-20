@@ -73,14 +73,9 @@ knowledge3 = And(
     Or(CKnight, CKnave),
     Not(And(CKnight, CKnave)),
 
-    # A's saying (makes no sense to put it in,
-    # because A is already either a Knight or a Knave,
-    # but also if A happens to be a Knave)
-    # Implication(AKnight, Or(AKnight, AKnave)),
-
-    # Instead I will put this in because it is the only way
-    # A's words would make sense
-    AKnight,
+    # A's saying
+    Implication(AKnave, Not(Or(AKnight,AKnave))),
+    
     # B's first saying
     Implication(BKnight, Implication(AKnight, AKnave)),
 

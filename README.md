@@ -3,3 +3,4 @@ In this lesson I learned about how a computer may represent some information tha
 
 ## List of projects
   - [0.Knights](knights/README.md)
+  - [1.Minesweeper](minesweeper/README.md)
