@@ -135,7 +135,11 @@ def iterate_pagerank(corpus, damping_factor):
             # Calculating the sum of all probabilities
             prob_sum = 0
             for i in i_pages:
-                prob_sum += res[i] / len(corpus[i])
+                if len(corpus[i]) == 0:
+                    nl = len(res)
+                else:
+                    nl = len(corpus[i])
+                prob_sum += res[i] / nl
             # Calculating new probability for current page
             res[key] = first_con + (damping_factor * prob_sum)
         for key in res:
