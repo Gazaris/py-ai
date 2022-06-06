@@ -59,7 +59,80 @@ def load_data(filename):
     labels should be the corresponding list of labels, where each label
     is 1 if Revenue is true, and 0 otherwise.
     """
-    raise NotImplementedError
+    evidence = list()
+    labels = list()
+    with open(filename) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            returning = -1
+            if row["VisitorType"] == "Returning_Visitor":
+                returning = 1
+            else:
+                returning = 0
+            weekend = -1
+            if row["Weekend"] == "TRUE":
+                weekend = 1
+            else:
+                weekend = 0
+            user = [
+                int(row["Administrative"]),
+                float(row["Administrative_Duration"]),
+                int(row["Informational"]),
+                float(row["Informational_Duration"]),
+                int(row["ProductRelated"]),
+                float(row["ProductRelated_Duration"]),
+                float(row["BounceRates"]),
+                float(row["ExitRates"]),
+                float(row["PageValues"]),
+                float(row["SpecialDay"]),
+                int(get_month_num(row["Month"])),
+                int(row["OperatingSystems"]),
+                int(row["Browser"]),
+                int(row["Region"]),
+                int(row["TrafficType"]),
+                int(returning),
+                int(weekend)
+            ]
+            evidence.append(user)
+            if row["Revenue"] == "TRUE":
+                labels.append(1)
+            else:
+                labels.append(0)
+    return (evidence, labels)
+
+
+def get_month_num(month):
+    """
+    Retyrn integer representation of a month given it's short version in a string
+    (from 0 to 11, -1 if was passed wrong string)
+    """
+    match month:
+        case "Jan":
+            return 0
+        case "Feb":
+            return 1
+        case "Mar":
+            return 2
+        case "Apr":
+            return 3
+        case "May":
+            return 4
+        case "Jun":
+            return 5
+        case "Jul":
+            return 6
+        case "Aug":
+            return 7
+        case "Sep":
+            return 8
+        case "Oct":
+            return 9
+        case "Nov":
+            return 10
+        case "Dec":
+            return 11
+        case _:
+            return -1
 
 
 def train_model(evidence, labels):
@@ -67,7 +140,9 @@ def train_model(evidence, labels):
     Given a list of evidence lists and a list of labels, return a
     fitted k-nearest neighbor model (k=1) trained on the data.
     """
-    raise NotImplementedError
+    model = KNeighborsClassifier(n_neighbors=1) 
+    model.fit(evidence, labels)
+    return model
 
 
 def evaluate(labels, predictions):
@@ -85,7 +160,24 @@ def evaluate(labels, predictions):
     representing the "true negative rate": the proportion of
     actual negative labels that were accurately identified.
     """
-    raise NotImplementedError
+    positive_num = 0
+    negative_num = 0
+    positive_guessed = 0
+    negative_guessed = 0
+
+    for i in range(len(labels)):
+        if labels[i] == 1:
+            positive_num += 1
+            if labels[i] == predictions[i]:
+                positive_guessed += 1
+        else:
+            negative_num += 1
+            if labels[i] == predictions[i]:
+                negative_guessed += 1
+    
+    sensitivity = positive_guessed / positive_num
+    specificity = negative_guessed / negative_num
+    return (sensitivity, specificity)
 
 
 if __name__ == "__main__":
