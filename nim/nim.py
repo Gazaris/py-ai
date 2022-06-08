@@ -52,7 +52,7 @@ class Nim():
         `action` must be a tuple `(i, j)`.
         """
         pile, count = action
-
+        # print("count:", count, ", pile:", pile, self.piles)
         # Check for errors
         if self.winner is not None:
             raise Exception("Game already won")
@@ -101,7 +101,11 @@ class NimAI():
         Return the Q-value for the state `state` and the action `action`.
         If no Q-value exists yet in `self.q`, return 0.
         """
-        raise NotImplementedError
+        state_t = tuple(state)
+        if (state_t, action) in self.q:
+            return self.q[state_t, action]
+        else:
+            return 0
 
     def update_q_value(self, state, action, old_q, reward, future_rewards):
         """
@@ -118,7 +122,11 @@ class NimAI():
         `alpha` is the learning rate, and `new value estimate`
         is the sum of the current reward and estimated future rewards.
         """
-        raise NotImplementedError
+        # new_q = old_q + self.alpha * ((reward + future_rewards) - old_q )
+        # if new_q < 0:
+        #     print("new_q:", new_q, "old_q:", old_q, "reward:", reward, "future_rewards:", future_rewards)
+        #     raise Exception("New q value can't be less than 0")
+        self.q[tuple(state), action] = old_q + self.alpha * ((reward + future_rewards) - old_q )
 
     def best_future_reward(self, state):
         """
@@ -130,7 +138,15 @@ class NimAI():
         Q-value in `self.q`. If there are no available actions in
         `state`, return 0.
         """
-        raise NotImplementedError
+        if sum(state) == 0:
+            return 0
+        best_reward = 0
+        for i in state: # Piles
+            for j in range(1, i + 1): # Every possilble action for the current pile
+                action_reward = self.get_q_value(state, (i, j))
+                if action_reward > best_reward:
+                    best_reward = action_reward
+        return best_reward
 
     def choose_action(self, state, epsilon=True):
         """
@@ -147,7 +163,42 @@ class NimAI():
         If multiple actions have the same Q-value, any of those
         options is an acceptable return value.
         """
-        raise NotImplementedError
+        random.seed()
+
+        def best_action():
+            if sum(state) == 1:
+                for pile in range(len(state)):
+                    if state[pile] == 1:
+                        return (pile, 1)
+            best = (-1, -1)
+            best_q_v = -1
+            # print("Getting the best move in state", state)
+            for i in range(len(state)): # Piles
+                if state[i] == 0:
+                    continue
+                # print("Checking pile", i)
+                for j in range(1, state[i] + 1): # All actions in the pile
+                    # print("Checking action", j)
+                    action_q_v = self.get_q_value(state, (i, j))
+                    # print("cur_action", action_q_v, "best_action", best_q_v)
+                    if action_q_v > best_q_v:
+                        best = (i, j)
+                        best_q_v = action_q_v
+            return best
+
+        # If choosing by epsilon and got into percentage, choose randomly
+        if epsilon and random.uniform(0, 1) <= self.epsilon:
+            # Getting all piles with anything left
+            ap = list() # Available piles list
+            for i in range(len(state)):
+                if state[i] > 0:
+                    ap.append(i)
+            # Getting random pile from available
+            pile = ap[random.randrange(0, len(ap))]
+            taken = random.randint(1, state[pile])
+            return (pile, taken)
+        else:
+            return best_action()
 
 
 def train(n):
