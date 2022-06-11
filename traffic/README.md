@@ -18,7 +18,7 @@ pyton traffic.py
 
 ## Output
 
-//////////
+After the launch of the program, it will start reading all the pics from **NUM_CATEGORIES** folders each into *numpy.ndarray* and pushing it into a list of images alongside with pushing the folder name into labels array as a label for each pic (which road sign it should be). It can take a while because there are a lot of images in the data set, so don't worry if the program doesn't output anything for a while. Then those arrays will be separated into training set and a testing set by the *tensorflow* library for further use. After creating and compiling the neural network model, it will start fitting to the training data, outputting the results of the training in the console. After the model ends fitting, the program will evalute the performance of the model on the testing set and also outputting the results to the console. And lastly, if the second argument was passed (the name of the file) the program will save the resulted model to the file with that name for future use.
 
 ## Experimentation and thought process
 
