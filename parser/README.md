@@ -17,4 +17,4 @@ pyton parser.py [filename]
 
 ## Output
 
-After launch the AI will prompt the user to enter a sentence and after pressing enter the sentence will be processed and the parced sentence tree with all extracted noun phrases will be written into the console. If a filename was specified, the program will take a sentence from it instead of prompting the user to enter a sentence.
+After launch the AI will prompt the user to enter a sentence and after pressing enter the sentence will be processed and the parced sentence tree with all extracted noun phrases will be written into the console. If a filename was specified, the program will take a sentence from it instead of prompting the user to enter a sentence. Keep in mind that the program will be able to process only words it has and in the meaning they written inside the **TERMINALS** variable. For example, the word "*walk*" is present in the program only as a noun and not as a verb.
