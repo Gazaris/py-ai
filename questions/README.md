@@ -6,6 +6,7 @@ In this project I implemented an AI answers query questions.
 
 ```
 pip3 install -r requirements.txt
+python reqs.py
 ```
 
 ## Usage
@@ -32,4 +33,4 @@ Query: How do neurons connect in a neural network?
 Neurons of one layer connect only to neurons of the immediately preceding and immediately following layers.
 ```
 
-After launch the user will be prompted to enter a question about some information in the corpus and AI will try to find the most related answer in the corpus documents.
+After launch the user will be prompted to enter a question about some information in the corpus and AI will try to find the most related answer in the corpus documents. Note that after launch the AI can not output anything for some time, that's because it needs time to read all of the corpus documents.
